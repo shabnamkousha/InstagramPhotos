@@ -28,6 +28,7 @@ public class IntagramPhotosAdapter extends ArrayAdapter<InstagramPhoto>{
         }
         TextView tvCaption=(TextView) convertView.findViewById(R.id.tvCaption );
         ImageView ivPhoto=(ImageView) convertView.findViewById(R.id.ivPhoto);
+        ImageView ivProfilePhoto=(ImageView) convertView.findViewById(R.id.ivProfilePic);
         TextView tvUsername=(TextView) convertView.findViewById(R.id.tvUsername);
         TextView tvLikes=(TextView) convertView.findViewById(R.id.tvLikes);
         tvCaption.setText(photo.caption);
@@ -35,6 +36,10 @@ public class IntagramPhotosAdapter extends ArrayAdapter<InstagramPhoto>{
         tvLikes.setText(String.valueOf(photo.likesCount)+ " Likes");
         ivPhoto.setImageResource(0);
         Picasso.with(getContext()).load(photo.imageUrl).into(ivPhoto);
+        ivProfilePhoto.setImageResource(0);
+
+        Picasso.with(getContext()).load(photo.userImageUrl).transform(new CircleTransform()).into(ivProfilePhoto);
+
         return convertView;
     }
 }
