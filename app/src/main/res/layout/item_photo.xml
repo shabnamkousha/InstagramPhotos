@@ -45,6 +45,7 @@
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
         android:minHeight="50dp"
+        android:layout_marginBottom="5dp"
         android:layout_below="@+id/relativeLayout"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -54,16 +55,19 @@
         android:layout_height="wrap_content"
         android:text="New Text"
         android:id="@+id/tvLikes"
+        android:textSize="10sp"
         android:textColor="#000066"
         android:layout_below="@+id/ivPhoto"
         android:layout_toRightOf="@+id/ivLikes"
         />
 
     <ImageView
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
         android:id="@+id/ivLikes"
         android:src="@drawable/like"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:layout_alignTop="@+id/tvLikes"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
