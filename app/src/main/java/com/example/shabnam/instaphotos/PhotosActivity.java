@@ -1,5 +1,6 @@
 package com.example.shabnam.instaphotos;
 
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,12 +21,33 @@ public class PhotosActivity extends AppCompatActivity {
     public static final String CLIENT_ID ="e05c462ebd86446ea48a5af73769b602";
     private ArrayList<InstagramPhoto> photos;
     private IntagramPhotosAdapter aPhotos;
+    private SwipeRefreshLayout swipeContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photos);
-        //android.os.Debug.waitForDebugger();
+
+        // Lookup the swipe container view
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Your code to refresh the list here.
+                // Make sure you call swipeContainer.setRefreshing(false)
+                // once the network request has completed successfully.
+                fetchPopularPhotos();
+            }
+        });
+        // Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
+
+
         photos =new ArrayList<>();
         aPhotos=new IntagramPhotosAdapter(this, photos);
         ListView lvPhotos = (ListView) findViewById(R.id.lvPhotos);
@@ -43,7 +65,7 @@ public class PhotosActivity extends AppCompatActivity {
         client.get(url,null, new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-
+                aPhotos.clear();
                 JSONArray photosJSON= null;
 
                 try {
@@ -65,6 +87,7 @@ public class PhotosActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 aPhotos.notifyDataSetChanged();
+                swipeContainer.setRefreshing(false);
             }
 
             @Override
