@@ -10,5 +10,6 @@ public class InstagramPhoto {
     public String userImageUrl;
     public int imageHeight;
     public int likesCount;
+    public long longCreation;
 
 }
