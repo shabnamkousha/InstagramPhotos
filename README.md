@@ -3,7 +3,7 @@ Instagram Client
 
 This is a read-only photo viewer for Instagram which allows a user to check out popular photos. 
 
-Time spent: 12 hours spent in total
+Time spent: 12 hours spent
 
 Completed user stories:
 - User can scroll through current popular photos from Instagram
